@@ -1,11 +1,11 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/BuildingScript.cs">
+  <MonoDevelop.Ide.Workspace />
+  <MonoDevelop.Ide.Workbench ActiveDocument="../../Shooter Game/Assets/Scripts/GameController.cs">
     <Files>
-      <File FileName="Assets/Scripts/BuildingScript.cs" Line="57" Column="1" />
-      <File FileName="Assets/Scripts/VillagePopulator.cs" Line="1009" Column="46" />
-      <File FileName="Assets/Scripts/VillageCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/CameraExtensions.cs" Line="1" Column="1" />
+      <File FileName="../../Shooter Game/Assets/Scripts/PlayerController.cs" Line="3" Column="1" />
+      <File FileName="../../Shooter Game/Assets/Scripts/GameController.cs" Line="11" Column="23" />
+      <File FileName="../../Shooter Game/Assets/Scripts/DestroyByContact.cs" Line="19" Column="75" />
+      <File FileName="../../Shooter Game/Assets/Scripts/DestroyByBoundary.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
