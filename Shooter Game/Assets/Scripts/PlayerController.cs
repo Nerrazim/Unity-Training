@@ -75,10 +75,13 @@ public class PlayerController : MonoBehaviour
 				Instantiate (playerExplosion, other.transform.position, other.transform.rotation);
 				GameController.instance.GameOver ();
 				Destroy(gameObject);
+
 			} else {
-				if(other.tag != "EnemyBolt") {
+				if(other.tag == "Hazard") {
 					playerHealth -= 10;
-				} else if(other.tag != "Hazard") {
+				} else if(other.tag == "EnemyBolt") {
+					playerHealth -= 15;
+				} else if(other.tag == "Enemy") {
 					playerHealth -= 15;
 				}
 
