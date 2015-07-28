@@ -51,6 +51,7 @@ public class GameController : MonoBehaviour {
 	void Start ()
 	{
 		buttonsGroup.alpha = 0f;
+		buttonsGroup.interactable = false;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
 	}
@@ -94,6 +95,7 @@ public class GameController : MonoBehaviour {
 
 			if(gameOver) {
 				buttonsGroup.alpha = 1f;
+				buttonsGroup.interactable = true;
 				break;
 			}
 		}
