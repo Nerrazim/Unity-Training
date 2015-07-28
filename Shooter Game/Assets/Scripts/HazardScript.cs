@@ -18,4 +18,12 @@ public class HazardScript : MonoBehaviour {
 			}
 		}
 	}
+
+	void OnTriggerExit(Collider other)
+	{
+		if (other.tag == "Boundary") 
+		{
+			Destroy (gameObject);
+		}
+	}
 }

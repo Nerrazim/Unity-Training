@@ -6,9 +6,9 @@ public class GameController : MonoBehaviour {
 
 	public GameObject hazard;
 	public GameObject enemy;
+	public GameObject bossEnemy;
 
 	public Vector3 spawnValues;
-	public Vector3 enemySpawnValues;
 	public int hazardCount;
 	public int enemiesCount;
 	public float spawnWait;
@@ -16,12 +16,13 @@ public class GameController : MonoBehaviour {
 	public float waveWait;
 
 	public Text scoreText;
-	public Text restartText;
 	public Text gameOverText;
+	public Text highScoreText;
+	public CanvasGroup buttonsGroup;
+
 	private int score;
 
 	private bool gameOver;
-	private bool restart;
 	private int weaveNumber;
 
 	private static GameController _instance;
@@ -39,11 +40,9 @@ public class GameController : MonoBehaviour {
 
 	void Awake()
 	{
-		restartText.text = "";
 		gameOverText.text = "";
-
+		highScoreText.text = "";
 		gameOver = false;
-		restart = false;
 
 		weaveNumber = 0;
 		score = 0;
@@ -51,38 +50,39 @@ public class GameController : MonoBehaviour {
 
 	void Start ()
 	{
-
+		buttonsGroup.alpha = 0f;
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
 	}
 
-	void Update()
-	{
-		if (restart && Input.GetKeyDown(KeyCode.R)) 
-		{
-			Application.LoadLevel(Application.loadedLevel);
-		}
-	}
-	
 	IEnumerator SpawnWaves ()
 	{
 		yield return new WaitForSeconds (startWait);
 
 		while (true)
 		{
+
+			Vector3 spawnPosition;
+			Quaternion spawnRotation;
+
 			if(weaveNumber % 2 == 0) {
 				for (int i = 0; i < hazardCount; i++)
 				{
-					Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-					Quaternion spawnRotation = Quaternion.identity;
+					spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+					spawnRotation = Quaternion.identity;
 					Instantiate (hazard, spawnPosition, spawnRotation);
 					yield return new WaitForSeconds (spawnWait);
 				}
+			} else if(weaveNumber % 5 == 0) {
+				spawnPosition = new Vector3 (0, spawnValues.y, spawnValues.z);
+				spawnRotation = Quaternion.identity;
+				Instantiate (bossEnemy, spawnPosition, spawnRotation);
+				yield return new WaitForSeconds (spawnWait * 2);
 			} else {
 				for (int i = 0; i < enemiesCount; i++)
 				{
-					Vector3 spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
-					Quaternion spawnRotation = enemy.transform.rotation;
+					spawnPosition = new Vector3 (Random.Range (-spawnValues.x, spawnValues.x), spawnValues.y, spawnValues.z);
+					spawnRotation = Quaternion.identity;
 					Instantiate (enemy, spawnPosition, spawnRotation);
 					yield return new WaitForSeconds (spawnWait);
 				}
@@ -93,8 +93,7 @@ public class GameController : MonoBehaviour {
 			++weaveNumber;
 
 			if(gameOver) {
-				restartText.text = "Press 'R' for restart";
-				restart = true;
+				buttonsGroup.alpha = 1f;
 				break;
 			}
 		}
@@ -111,6 +110,25 @@ public class GameController : MonoBehaviour {
 		gameOverText.text = "Game Over";
 		gameOver = true;
 		weaveNumber = 0;
+
+		int currentScore = PlayerPrefs.GetInt("HighScore");
+
+		if (currentScore < score) {
+			PlayerPrefs.SetInt ("HighScore", score);
+			highScoreText.text = "New High Score: " + PlayerPrefs.GetInt ("HighScore");
+		} else {
+			highScoreText.text = "Score: " + score;
+		}
+	}
+
+	public void didPressRestart()
+	{
+		Application.LoadLevel (Application.loadedLevel);
+	}
+	
+	public void didPressMainMenu()
+	{
+		Application.LoadLevel ("MainMenu");
 	}
 
 	void UpdateScore()
