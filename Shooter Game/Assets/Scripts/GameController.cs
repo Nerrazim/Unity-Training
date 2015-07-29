@@ -18,6 +18,7 @@ public class GameController : MonoBehaviour {
 	public Text scoreText;
 	public Text gameOverText;
 	public Text highScoreText;
+	public Text highestScoreText;
 	public CanvasGroup buttonsGroup;
 
 	private int score;
@@ -40,8 +41,6 @@ public class GameController : MonoBehaviour {
 
 	void Awake()
 	{
-		gameOverText.text = "";
-		highScoreText.text = "";
 		gameOver = false;
 
 		weaveNumber = 0;
@@ -52,8 +51,20 @@ public class GameController : MonoBehaviour {
 	{
 		buttonsGroup.alpha = 0f;
 		buttonsGroup.interactable = false;
+		gameOverText.text = "";
+		highScoreText.text = "";
+		highestScoreText.text = "High Score: " + PlayerPrefs.GetInt ("HighScore");
 		UpdateScore ();
 		StartCoroutine (SpawnWaves ());
+	}
+
+	void Update () 
+	{
+		if (Input.GetKeyDown ("p") && Time.timeScale != 0) {
+			Time.timeScale = 0;
+		} else if (Input.GetKeyDown ("p") && Time.timeScale == 0){
+			Time.timeScale = 1; 
+		}
 	}
 
 	IEnumerator SpawnWaves ()
@@ -131,6 +142,15 @@ public class GameController : MonoBehaviour {
 	public void didPressMainMenu()
 	{
 		Application.LoadLevel ("MainMenu");
+	}
+
+	public void didPressPause() 
+	{
+		if (Time.timeScale != 0) {
+			Time.timeScale = 0;
+		} else if (Time.timeScale == 0) {
+			Time.timeScale = 1; 
+		}
 	}
 
 	void UpdateScore()

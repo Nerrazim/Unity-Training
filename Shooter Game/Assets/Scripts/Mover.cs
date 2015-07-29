@@ -12,6 +12,7 @@ public class Mover : MonoBehaviour
 	}
 	
 	void Start () {
+		//Moves the object forward with speed
 		rigBody.velocity = transform.forward * speed;
 	}
 

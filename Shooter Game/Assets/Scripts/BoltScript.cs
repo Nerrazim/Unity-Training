@@ -5,7 +5,8 @@ public class BoltScript : MonoBehaviour {
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (this.tag == "EnemyBolt" && other.tag == "Enemy") {
+		if (this.tag == "EnemyBolt" && other.tag == "Enemy" ||
+		    this.tag == "EnemyBolt" && other.tag == "Bolt") {
 			return;
 		}
 
@@ -16,6 +17,11 @@ public class BoltScript : MonoBehaviour {
 
 	void OnTriggerExit(Collider other)
 	{
+		if (this.tag == "EnemyBolt" && other.tag == "Enemy" ||
+		    this.tag == "EnemyBolt" && other.tag == "Bolt") {
+			return;
+		}
+
 		if (other.tag == "Boundary") 
 		{
 			Destroy (gameObject);

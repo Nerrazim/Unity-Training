@@ -6,6 +6,7 @@ public class HazardScript : MonoBehaviour {
 	public GameObject hazardExplosion;
 	public int scoreValue;
 
+	//Handle Collsions on Enter
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.tag != "Boundary") {
@@ -19,11 +20,9 @@ public class HazardScript : MonoBehaviour {
 		}
 	}
 
+	//Handle Collisions on Exit
 	void OnTriggerExit(Collider other)
 	{
-		if (other.tag == "Boundary") 
-		{
-			Destroy (gameObject);
-		}
+
 	}
 }

@@ -9,6 +9,7 @@ public class Boundary
 	
 }
 
+//Basic class for all Spaceships (contains common values)
 public class Spaceship : MonoBehaviour {
 
 	public float speed = 10f;

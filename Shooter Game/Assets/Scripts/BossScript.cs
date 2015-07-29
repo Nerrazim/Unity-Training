@@ -22,11 +22,11 @@ public class BossScript : Spaceship {
 		if (Time.time > nextFire) {
 			nextFire = Time.time + fireRate;
 			Vector3 shotSpawnPosition = shotSpawn.position;
-			Instantiate(bolt, new Vector3(shotSpawnPosition.x - 2f, 0f, shotSpawnPosition.z - 0.1f), shotSpawn.rotation);
-			Instantiate(bolt, new Vector3(shotSpawnPosition.x - 1f, 0f, shotSpawnPosition.z - 0.1f), shotSpawn.rotation);
+			Instantiate(bolt, new Vector3(shotSpawnPosition.x - 2f, 0f, shotSpawnPosition.z + 1f), shotSpawn.rotation);
+			Instantiate(bolt, new Vector3(shotSpawnPosition.x - 1f, 0f, shotSpawnPosition.z + 0.5f), shotSpawn.rotation);
 			Instantiate(bolt, shotSpawnPosition, shotSpawn.rotation);
-			Instantiate(bolt, new Vector3(shotSpawnPosition.x + 1f, 0f, shotSpawnPosition.z - 0.1f), shotSpawn.rotation);
-			Instantiate(bolt, new Vector3(shotSpawnPosition.x + 2f, 0f, shotSpawnPosition.z - 0.1f), shotSpawn.rotation);
+			Instantiate(bolt, new Vector3(shotSpawnPosition.x + 1f, 0f, shotSpawnPosition.z + 0.5f), shotSpawn.rotation);
+			Instantiate(bolt, new Vector3(shotSpawnPosition.x + 2f, 0f, shotSpawnPosition.z + 1f), shotSpawn.rotation);
 			audioSource.Play ();
 		}
 	}

@@ -15,6 +15,7 @@ public class BackgroundScroller : MonoBehaviour {
 	
 	void Update ()
 	{
+		//Moves the background tiles
 		float newPosition = Mathf.Repeat(Time.time * scrollSpeed, tileSizeZ);
 		transform.position = startPosition + Vector3.forward * newPosition;
 	}
